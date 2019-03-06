@@ -1,0 +1,45 @@
+﻿@page
+@model AspNetCoreDemo.Pages.NewUserModel
+@{
+    ViewData["Title"] = "NewUser";
+}
+
+<h2>New User</h2>
+<form asp-page-handler="AddUser" method="POST">
+
+    @if (Model.ErrorMessage != "")
+    {
+        <span class="alert alert-danger">@Model.ErrorMessage</span>
+    }
+    @if (Model.SuccessMessage != "")
+    {
+        <span class="alert alert-success">@Model.SuccessMessage</span>
+    }
+
+    <div class="form-group">
+        <input type="text" asp-for="user.UserId" class="form-control" placeholder="Enter User Id" />
+    </div>
+
+    <div class="form-group">
+        <input type="text" asp-for="user.Name" class="form-control" placeholder="Enter User Name" />
+    </div>
+
+    <div class="form-group">
+        <input type="text" asp-for="user.Address" class="form-control" placeholder="Enter Address" />
+    </div>
+
+    <div class="form-group">
+        <input type="text" asp-for="user.ContactNo" class="form-control" placeholder="Enter Contact Number" />
+    </div>
+
+    <div class="form-group">
+        <input type="text" asp-for="user.Email" class="form-control" placeholder="Enter Email" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+
+</form>
+
+

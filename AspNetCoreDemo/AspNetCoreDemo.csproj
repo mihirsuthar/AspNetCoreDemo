@@ -5,13 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Uploads\ambulance_red.png" />
+    <Content Remove="wwwroot\Uploads\Car_red.png" />
+    <Content Remove="wwwroot\Uploads\source - Copy.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Uploads\" />
+    <None Include="wwwroot\Uploads\ambulance_red.png" />
+    <None Include="wwwroot\Uploads\Car_red.png" />
+    <None Include="wwwroot\Uploads\source - Copy.gif" />
   </ItemGroup>
 
 </Project>

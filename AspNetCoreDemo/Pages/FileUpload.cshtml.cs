@@ -35,9 +35,13 @@ namespace AspNetCoreDemo.Pages
         public void OnGet()
         {
             DirectoryContents = new Dictionary<string, string>();
-            foreach(var item in _fileProvider.GetDirectoryContents("Uploads").ToList())
+
+            ErrorMessage = string.IsNullOrEmpty(Request.Query["ErrorMessage"].ToString()) ? "" : Request.Query["ErrorMessage"].ToString();
+            SuccessMessage = string.IsNullOrEmpty(Request.Query["SuccessMessage"].ToString()) ? "" : Request.Query["SuccessMessage"].ToString();
+
+            foreach (var item in _fileProvider.GetDirectoryContents("\\wwwroot\\Uploads").ToList())
             {
-                DirectoryContents.Add(item.Name, Path.Combine(_environment.ContentRootPath, "Uploads", item.Name));
+                DirectoryContents.Add(item.Name, "~/Uploads/" + item.Name);
             }            
         }
 
@@ -46,7 +50,12 @@ namespace AspNetCoreDemo.Pages
             ClearMessages();
             try
             {
-                string filePath = Path.Combine(_environment.ContentRootPath, "Uploads", FileUpload.FileName);
+                if(FileUpload == null)
+                {
+                    return RedirectToAction("Index", new { ErrorMessage = "Please select a file to upload." });
+                }
+
+                string filePath = _environment.ContentRootPath + "\\wwwroot\\Uploads\\" + FileUpload.FileName;
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await FileUpload.CopyToAsync(fileStream);
@@ -56,10 +65,11 @@ namespace AspNetCoreDemo.Pages
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                ErrorMessage = "Unable to upload file.";
+                
+                return RedirectToAction("Index", new { ErrorMessage = "Unable to upload file." });
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { SuccessMessage = "File Uploaded Successfully."});
         }
 
         public async Task<IActionResult> OnGetDownloadFile(string fileName)
@@ -70,7 +80,7 @@ namespace AspNetCoreDemo.Pages
                 return RedirectToAction("Index");
             }
 
-            string path = Path.Combine(_environment.ContentRootPath, "Uploads", fileName);
+            string path = _environment.ContentRootPath + "\\wwwroot\\Uploads\\" + fileName;
             MemoryStream memory = new MemoryStream();
 
             using (FileStream stream = new FileStream(path, FileMode.Open))

@@ -17,23 +17,33 @@
     }
 
     <div class="form-group">
+        <label asp-for="user.UserId"></label>
         <input type="text" asp-for="user.UserId" class="form-control" placeholder="Enter User Id" />
+        <span asp-validation-for="user.UserId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
+        <label asp-for="user.Name"></label>
         <input type="text" asp-for="user.Name" class="form-control" placeholder="Enter User Name" />
+        <span asp-validation-for="user.Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
+        <label asp-for="user.Address"></label>
         <input type="text" asp-for="user.Address" class="form-control" placeholder="Enter Address" />
+        <span asp-validation-for="user.Address" class="text-danger"></span>
     </div>
 
     <div class="form-group">
+        <label asp-for="user.ContactNo"></label>
         <input type="text" asp-for="user.ContactNo" class="form-control" placeholder="Enter Contact Number" />
+        <span asp-validation-for="user.ContactNo" class="text-danger"></span>
     </div>
 
     <div class="form-group">
+        <label asp-for="user.Email"></label>
         <input type="text" asp-for="user.Email" class="form-control" placeholder="Enter Email" />
+        <span asp-validation-for="user.Email" class="text-danger"></span>
     </div>
 
     <div class="form-group">

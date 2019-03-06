@@ -40,7 +40,7 @@ namespace AspNetCoreDemo.Pages
                 {
                     Users = _db.Users.ToList();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -55,6 +55,9 @@ namespace AspNetCoreDemo.Pages
             ResetNotificationMessages();
             try
             {
+                if (!ModelState.IsValid)
+                { return Page(); }
+
                 using (_db)
                 {
                     _db.Users.Add(user);
@@ -63,6 +66,7 @@ namespace AspNetCoreDemo.Pages
                 SuccessMessage = "User Added Successfully.";
 
                 return RedirectToPage("Index", new { SuccessMessage = "User added successfully." });
+
             }
             catch (Exception ex)
             {
